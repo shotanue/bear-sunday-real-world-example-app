@@ -1,4 +1,4 @@
-FROM alpine:3.10.3 AS App
+FROM alpine:3.10.3 AS Work
 
 ENV COMPOSER_HOME /composer
 ENV COMPOSER_ALLOW_SUPERUSER 1
@@ -29,17 +29,29 @@ RUN apk --update --no-cache add \
     php7-xml \
     php7-xmlreader \
     php7-xmlwriter \
-    php7-zlib \
-    && rm -rf /var/cache/apk/* /var/tmp/* /tmp/*
+    php7-zlib
 
 RUN composer config -g repos.packagist composer https://packagist.jp \
     && composer global require hirak/prestissimo
 
 VOLUME /var/app
-
 WORKDIR /var/app
 
-ENTRYPOINT ["top"]
+#############################################
+FROM Work AS Dev
 
-#ENTRYPOINT ["composer"]
-#CMD ["server"]
+RUN apk --update --no-cache add \
+    php7-xdebug
+
+ENTRYPOINT ["php"]
+CMD ["-a"]
+
+#############################################
+FROM Work AS Prod
+
+COPY . .
+
+RUN composer update
+
+ENTRYPOINT ["composer"]
+CMD ["serve"]
