@@ -34,7 +34,6 @@ RUN apk --update --no-cache add \
 RUN composer config -g repos.packagist composer https://packagist.jp \
     && composer global require hirak/prestissimo
 
-VOLUME /var/app
 WORKDIR /var/app
 
 #############################################
@@ -42,6 +41,8 @@ FROM Work AS Dev
 
 RUN apk --update --no-cache add \
     php7-xdebug
+
+VOLUME /var/app
 
 ENTRYPOINT ["php"]
 CMD ["-a"]
