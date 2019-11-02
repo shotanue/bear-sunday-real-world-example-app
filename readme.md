@@ -5,6 +5,8 @@
 
 ### [Demo](https://github.com/gothinkster/realworld)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
 
+![BuildImage](https://github.com/shotanue/bear-sunday-real-world-example-app/workflows/BuildImage/badge.svg)
+
 
 This codebase was created to demonstrate a fully fledged fullstack application built with **BEAR.Sunday** including CRUD operations, authentication, routing, pagination, and more.
 
