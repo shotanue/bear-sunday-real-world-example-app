@@ -22,7 +22,7 @@ jobs:
         if [[ $? -eq 0 ]]; then
           exit 0
         fi
-
+        cat res.txt
         exit 1
 
     - name: docker login
