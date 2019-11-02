@@ -1,15 +1,21 @@
 version: "3.7"
 
 services:
-  endpoint:
+  conduit:
     build:
       context: Conduit
       dockerfile: Dockerfile
-      target: Dev
+      target: development
     volumes:
       - ./Conduit:/var/app
-    entrypoint: composer
-    command:
-      - serve
     ports:
+      - 8080:8080
       - 9000:9000
+
+  composer:
+    build:
+      context: Conduit
+      dockerfile: Dockerfile
+      target: Composer
+    volumes:
+      - ./Conduit:/var/app
