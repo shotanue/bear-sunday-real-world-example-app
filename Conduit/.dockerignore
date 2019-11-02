@@ -6,6 +6,5 @@
 /build/
 /var/log/*
 !var/log/.gitkeep
-phpunit.xml
 /docs/api/
 .phpunit.result.cache

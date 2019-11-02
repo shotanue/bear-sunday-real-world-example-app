@@ -20,9 +20,6 @@ ENV PATH /composer/vendor/bin:$PATH
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN composer config -g repos.packagist composer https://packagist.jp \
-    && composer global require hirak/prestissimo
-
 WORKDIR /var/app
 
 #############################################
@@ -40,14 +37,24 @@ VOLUME /var/app
 ENTRYPOINT ["php"]
 CMD ["bin/swoole.php"]
 
+#############################################
+FROM base-image AS test-package
+
+COPY . .
+
+RUN rm -rf vendor
+RUN composer install && composer compile
+
+ENTRYPOINT ["composer"]
+CMD ["test"]
 
 #############################################
 FROM base-image AS ship
 
 COPY . .
 
-RUN composer install --no-dev \
- && composer compile
+RUN rm -rf vendor
+RUN composer install --no-dev && composer compile
 
 RUN rm -rf tests
 
