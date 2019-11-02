@@ -16,6 +16,6 @@ services:
     build:
       context: Conduit
       dockerfile: Dockerfile
-      target: Composer
+      target: composer
     volumes:
       - ./Conduit:/var/app
