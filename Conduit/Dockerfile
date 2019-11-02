@@ -50,8 +50,7 @@ VOLUME /var/app
 FROM composer AS package
 
 COPY . .
-RUN rm -rf vendor var/tmp/* var/log/* \
- && composer install --no-dev \
+RUN composer install --no-dev \
  && composer compile
 
 #############################################
