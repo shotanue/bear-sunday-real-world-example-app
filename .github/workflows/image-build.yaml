@@ -1,0 +1,26 @@
+name: BuildImage
+
+on: 
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Generate tag
+      run: export TAG=${GITHUB_REF#refs/*/}; echo docker.pkg.github.com/${{ github.repository }}/bear-sunday-real-world-example-app:${TAG/master/latest} > /tmp/tag-for-docker.txt
+      
+    - name: Build the Docker image
+      run: docker build Conduit --tag $(cat /tmp/tag-for-docker.txt)
+
+    - name: Login to GitHub Package Registry
+      run: docker login docker.pkg.github.com -u shotanue -p $GITHUB_TOKEN
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_TO_PUSH_TO_PACKAGE_REGISTRY }}
+
+    - name: Push the Docker image to GitHub Package Registry
+      run: docker push $(cat /tmp/tag-for-docker.txt)
