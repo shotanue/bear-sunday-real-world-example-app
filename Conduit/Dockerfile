@@ -14,6 +14,15 @@ COPY --from=build-extensions  /usr/local/lib/php/extensions/no-debug-non-zts-201
 RUN apk add --update --no-cache libstdc++
 RUN docker-php-ext-enable swoole
 
+ENV COMPOSER_HOME /composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV PATH /composer/vendor/bin:$PATH
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+RUN composer config -g repos.packagist composer https://packagist.jp \
+    && composer global require hirak/prestissimo
+
 WORKDIR /var/app
 
 #############################################
@@ -31,39 +40,14 @@ VOLUME /var/app
 ENTRYPOINT ["php"]
 CMD ["bin/swoole.php"]
 
-#############################################
-FROM base-image AS composer
-
-ENV COMPOSER_HOME /composer
-ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV PATH /composer/vendor/bin:$PATH
-
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-RUN composer config -g repos.packagist composer https://packagist.jp \
-    && composer global require hirak/prestissimo
-
-ENTRYPOINT ["composer"]
-VOLUME /var/app
-
-#############################################
-FROM composer AS package
-
-COPY . .
-RUN composer install --no-dev \
- && composer compile
-
-#############################################
-FROM package AS test
-
-ENTRYPOINT ["composer"]
-CMD ["test"]
 
 #############################################
 FROM base-image AS ship
 
-# remove composer
-COPY --from=package /var/app /var/app
+COPY . .
+
+RUN composer install --no-dev \
+ && composer compile
 
 RUN rm -rf tests
 
