@@ -7,6 +7,6 @@ if (! file_exists($bootstrap)) {
 exit((require $bootstrap)(
     'prod-app',
     'Acme\Conduit',
-    '127.0.0.1',
+    '0.0.0.0',
     '8080'
 ));
