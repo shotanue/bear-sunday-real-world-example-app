@@ -35,6 +35,7 @@ RUN composer config -g repos.packagist composer https://packagist.jp \
     && composer global require hirak/prestissimo
 
 WORKDIR /var/app
+EXPOSE 9000
 
 #############################################
 FROM Work AS Dev

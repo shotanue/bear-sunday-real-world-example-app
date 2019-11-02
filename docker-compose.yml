@@ -12,12 +12,4 @@ services:
     command:
       - serve
     ports:
-      - 8080:8080
-
-#  prod:
-#    build:
-#      context: Conduit
-#      dockerfile: Dockerfile
-#      target: Prod
-#    ports:
-#      - 9000:9000
+      - 9000:9000
