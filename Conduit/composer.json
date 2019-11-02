@@ -5,7 +5,8 @@
     "description": "",
     "require": {
         "php": ">=7.3.0",
-        "bear/package": "^1.9"
+        "bear/package": "^1.9",
+        "bear/swoole": "^0.4.2"
     },
     "require-dev": {
         "bear/qatools": "^1.9",
