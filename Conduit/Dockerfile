@@ -55,6 +55,12 @@ RUN rm -rf vendor var/tmp/* var/log/* \
  && composer compile
 
 #############################################
+FROM package AS test
+
+ENTRYPOINT ["composer"]
+CMD ["test"]
+
+#############################################
 FROM base-image AS ship
 
 # remove composer
