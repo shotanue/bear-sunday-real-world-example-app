@@ -33,7 +33,7 @@ jobs:
 
       - name: push image
         run: |
-        TAG="docker.pkg.github.com/${{ github.repository }}/docker:${SHA}"
-        docker push docker.pkg.github.com/${{ github.repository }}/docker:$SHA
+          TAG="docker.pkg.github.com/${{ github.repository }}/docker:${SHA}"
+          docker push docker.pkg.github.com/${{ github.repository }}/docker:$SHA
         env:
           SHA: ${{ github.sha }}
