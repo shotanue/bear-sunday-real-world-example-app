@@ -8,3 +8,5 @@
 !var/log/.gitkeep
 /docs/api/
 .phpunit.result.cache
+vendor
+tests

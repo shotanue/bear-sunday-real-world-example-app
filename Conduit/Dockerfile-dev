@@ -1,0 +1,21 @@
+FROM docker.pkg.github.com/shotanue/swoole-app/docker-dev:7.3-alpine3.10 AS base-image
+
+WORKDIR /var/app
+VOLUME /var/app
+
+#############################################
+FROM base-image AS composer
+
+ENV COMPOSER_HOME /composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV PATH /composer/vendor/bin:$PATH
+
+COPY --from=composer:1.9.1 /usr/bin/composer /usr/bin/composer
+
+#############################################
+FROM base-image AS development
+
+EXPOSE 8080 9000
+
+ENTRYPOINT ["php"]
+CMD ["bin/swoole.php"]

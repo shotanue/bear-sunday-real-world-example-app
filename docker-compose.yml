@@ -4,10 +4,19 @@ services:
   conduit:
     build:
       context: Conduit
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-dev
       target: development
     volumes:
       - ./Conduit:/var/app
     ports:
       - 8080:8080
       - 9000:9000
+
+  composer:
+    build:
+      context: Conduit
+      dockerfile: Dockerfile-dev
+      target: composer
+    tty: true
+    volumes:
+      - ./Conduit:/var/app
