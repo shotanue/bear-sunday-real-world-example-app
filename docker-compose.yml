@@ -11,11 +11,3 @@ services:
     ports:
       - 8080:8080
       - 9000:9000
-
-  composer:
-    build:
-      context: Conduit
-      dockerfile: Dockerfile
-      target: composer
-    volumes:
-      - ./Conduit:/var/app
