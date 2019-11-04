@@ -11,6 +11,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+      - name: docker login
+        run: docker login docker.pkg.github.com -u shotanue -p $GITHUB_TOKEN
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_TO_PUSH_TO_PACKAGE_REGISTRY }}
       - name: build image
         run: |
           TAG="docker.pkg.github.com/${{ github.repository }}/docker:${SHA}"
@@ -25,12 +29,6 @@ jobs:
           docker container run --rm  multi-stage:test
         env:
           SHA: ${{ github.sha }}
-
-      - name: docker login
-        run: docker login docker.pkg.github.com -u shotanue -p $GITHUB_TOKEN
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_TO_PUSH_TO_PACKAGE_REGISTRY }}
-
       - name: push image
         run: |
           TAG="docker.pkg.github.com/${{ github.repository }}/docker:${SHA}"
