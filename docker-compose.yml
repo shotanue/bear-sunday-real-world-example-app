@@ -17,7 +17,6 @@ services:
       context: Conduit
       dockerfile: Dockerfile-dev
       target: composer
-    tty: true
     volumes:
       - ./Conduit:/var/app
 
@@ -25,8 +24,7 @@ services:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: root
-    volumes:
-      - /var/lib/mysql
+      MYSQL_DATABASE: conduit
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
