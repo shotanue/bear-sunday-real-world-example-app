@@ -1,4 +1,6 @@
-.env
+# must ignore .env file in real world
+#.env
+
 .php_cs
 .php_cs.cache
 .DS_Store
