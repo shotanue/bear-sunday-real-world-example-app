@@ -4,7 +4,7 @@ ENV COMPOSER_HOME /composer
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV PATH /composer/vendor/bin:$PATH
 
-RUN docker-php-ext-enable pdo_mysql
+RUN docker-php-ext-install pdo_mysql
 
 WORKDIR /var/app
 
