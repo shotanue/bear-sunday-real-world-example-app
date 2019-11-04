@@ -14,6 +14,11 @@ ENV PATH /composer/vendor/bin:$PATH
 
 COPY --from=composer:1.9.1 /usr/bin/composer /usr/bin/composer
 
+# install migration tool
+RUN cd /tmp \
+ && curl -sSLO https://github.com/k0kubun/sqldef/releases/download/v0.5.7/mysqldef_linux_amd64.tar.gz \
+ && tar zxvf mysqldef_linux_amd64.tar.gz -C /usr/bin
+
 ENTRYPOINT ["composer"]
 CMD [""]
 

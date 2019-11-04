@@ -19,5 +19,3 @@ $pass = getenv('DB_PASS');
 $pdo = new PDO($dsn, $userName, $pass);
 $pdo->exec('CREATE DATABASE IF NOT EXISTS ' . getenv('DB_NAME'));
 $pdo->exec('CREATE DATABASE IF NOT EXISTS ' . getenv('DB_NAME') . '_test');
-passthru('./vendor/bin/phinx migrate -c var/phinx/phinx.php -e development');
-passthru('./vendor/bin/phinx migrate -c var/phinx/phinx.php -e test');

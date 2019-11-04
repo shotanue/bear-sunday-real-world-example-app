@@ -16,7 +16,6 @@
         "bear/qatools": "^1.9",
         "josegonzalez/dotenv": "^3.2",
         "roave/security-advisories": "dev-master",
-        "robmorgan/phinx": "^0.11.1",
         "bear/api-doc": "^0.4.1"
     },
     "autoload": {
@@ -62,7 +61,9 @@
         ],
         "serve": "php -dzend_extension=xdebug.so -S 0.0.0.0:9000 -t public",
         "app": "php bin/app.php",
-        "page": "php bin/page.php"
+        "page": "php bin/page.php",
+        "migrate": "for ddl in var/schema/*.sql; do mysqldef -uroot -proot -hdb conduit < ${ddl};done",
+        "mysqldef": "mysqldef --help"
     },
     "scripts-descriptions": {
         "setup": "Setup the project",
@@ -74,7 +75,9 @@
         "cs-fix": "Fix the coding standard",
         "serve": "Start php built-in server",
         "app": "Request app resource",
-        "page": "Request page resource"
+        "page": "Request page resource",
+        "mysqldef": "Run mysqldef",
+        "migrate": "Run migrate"
     },
     "config": {
         "process-timeout": 0
