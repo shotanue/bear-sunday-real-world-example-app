@@ -62,8 +62,8 @@
         "serve": "php -dzend_extension=xdebug.so -S 0.0.0.0:9000 -t public",
         "app": "php bin/app.php",
         "page": "php bin/page.php",
-        "migrate": "for ddl in var/schema/*.sql; do mysqldef -uroot -proot -hdb conduit < ${ddl};done",
-        "mysqldef": "mysqldef --help"
+        "migrate": "cat var/schema/*.sql | mysqldef -uroot -proot -hdb conduit",
+        "migrate-test": "cat var/schema/*.sql | mysqldef -uroot -proot -hdb conduit_test"
     },
     "scripts-descriptions": {
         "setup": "Setup the project",
@@ -77,7 +77,8 @@
         "app": "Request app resource",
         "page": "Request page resource",
         "mysqldef": "Run mysqldef",
-        "migrate": "Run migrate"
+        "migrate": "Run migration",
+        "migrate-test": "Run migration to test"
     },
     "config": {
         "process-timeout": 0
