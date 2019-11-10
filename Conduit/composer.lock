@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c2d74dd42a64502dc9aef04868a2929b",
+    "content-hash": "11036ccfe996c7a4cf3bcf4ded69c01f",
     "packages": [
         {
             "name": "aura/cli",
@@ -2514,6 +2514,47 @@
                 "psr"
             ],
             "time": "2019-09-25T20:30:54+00:00"
+        },
+        {
+            "name": "ray/validate-module",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ray-di/Ray.ValidateModule.git",
+                "reference": "7e4e3c4a05e11dc989d689202ac6ae625695588e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ray-di/Ray.ValidateModule/zipball/7e4e3c4a05e11dc989d689202ac6ae625695588e",
+                "reference": "7e4e3c4a05e11dc989d689202ac6ae625695588e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "ray/di": "^2.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ray\\Validation\\": "src/"
+                },
+                "exclude-from-classmap": [
+                    "tests/Fake"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Validation module for Ray.Di",
+            "keywords": [
+                "Ray.Di",
+                "validation"
+            ],
+            "time": "2018-02-13T06:52:18+00:00"
         },
         {
             "name": "ray/web-param-module",

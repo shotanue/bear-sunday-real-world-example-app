@@ -10,7 +10,9 @@
         "bear/aura-router-module": "^2.0",
         "ray/identity-value-module": "^0.2.0",
         "ray/query-module": "^0.5.1",
-      "ext-pdo": "*"
+        "ray/validate-module": "^1.0",
+        "ext-pdo": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "bear/qatools": "^1.9",
@@ -62,8 +64,8 @@
         "serve": "php -dzend_extension=xdebug.so -S 0.0.0.0:9000 -t public",
         "app": "php bin/app.php",
         "page": "php bin/page.php",
-        "migrate": "cat var/schema/*.sql | mysqldef -uroot -proot -hdb conduit",
-        "migrate-test": "cat var/schema/*.sql | mysqldef -uroot -proot -hdb conduit_test"
+        "migrate": "mysqldef -uroot -proot -hdb conduit < var/schema/schema.sql",
+        "migrate-test": "mysqldef -uroot -proot -hdb conduit_test < var/schema/schema.sql"
     },
     "scripts-descriptions": {
         "setup": "Setup the project",
