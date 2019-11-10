@@ -17,8 +17,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_TO_PUSH_TO_PACKAGE_REGISTRY }}
       - name: build image
         run: |
-          docker image build --target=composer --tag=conduit-test Conduit
+          docker image build --target=composer --tag=conduit-composer Conduit
 
       - name: test image
         run: |
-          docker container run --rm  -v./Conduit:/var/app conduit-test test
+          docker container run --rm -v $(pwd)/Conduit:/var/app conduit-composer install
+          docker container run --rm -v $(pwd)/Conduit:/var/app conduit-composer test
