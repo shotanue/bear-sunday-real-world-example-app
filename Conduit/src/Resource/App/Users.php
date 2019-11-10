@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace Acme\Conduit\Resource\App;
 
+use Acme\Conduit\Module\ConduitAuth\ConduitAuth;
 use Acme\Conduit\Module\Error\ValidationErrorException;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\StatusCode;
 use Ray\AuraSqlModule\Annotation\Transactional;
 use Ray\Di\Di\Named;
+use Ray\Query\Annotation\Query;
 use Ray\Validation\Annotation\OnFailure;
 use Ray\Validation\Annotation\Valid;
 use Ray\Validation\Annotation\OnValidate;
@@ -49,7 +51,16 @@ class Users extends ResourceObject
     }
 
     /**
-     * @Named("json_schema_dir=user, json_validate_dir=user")
+     */
+    public function onGet(): ResourceObject
+    {
+        $this->body = [
+            'tmp' => 'test'
+        ];
+        return $this;
+    }
+
+    /**
      * @JsonSchema(key="user", schema="user.json", params="user.post.json")
      *
      * @Valid

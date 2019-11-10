@@ -12,7 +12,9 @@
         "ray/query-module": "^0.5.1",
         "ray/validate-module": "^1.0",
         "ext-pdo": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "firebase/php-jwt": "^5.0",
+        "aura/web": "^2.1"
     },
     "require-dev": {
         "bear/qatools": "^1.9",

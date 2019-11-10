@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Acme\Conduit\Module\Error;
 
+use Acme\Conduit\Module\ConduitAuth\ForbiddenException;
+use Acme\Conduit\Module\ConduitAuth\UnauthorizedException;
 use BEAR\Package\Provide\Error\LogRef;
 use BEAR\Package\Provide\Error\Status;
 use BEAR\Resource\Exception\JsonSchemaException;
@@ -10,6 +12,7 @@ use BEAR\Resource\ResourceObject;
 use BEAR\Sunday\Extension\Router\RouterMatch;
 use Exception;
 use function get_class;
+use Koriym\HttpConstants\StatusCode;
 
 final class ErrorPage extends ResourceObject
 {
@@ -25,7 +28,8 @@ final class ErrorPage extends ResourceObject
 
     public function toString()
     {
-        $this->view = json_encode($this->body, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 512) . PHP_EOL;
+        $this->view = json_encode($this->body, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES,
+                512) . PHP_EOL;
 
         return $this->view;
     }
@@ -42,7 +46,15 @@ final class ErrorPage extends ResourceObject
             $this->code = self::VALIDATION_ERROR_CODE;
             return ParseJsonSchemaMsg::parse($e->getMessage());
         }
-        if ($e instanceof ValidationErrorException){
+        if ($e instanceof UnauthorizedException) {
+            $this->code = StatusCode::UNAUTHORIZED;
+            return [];
+        }
+        if ($e instanceof ForbiddenException) {
+            $this->code = StatusCode::FORBIDDEN;
+            return [];
+        }
+        if ($e instanceof ValidationErrorException) {
             $this->code = self::VALIDATION_ERROR_CODE;
             return $e->toArray();
         }
