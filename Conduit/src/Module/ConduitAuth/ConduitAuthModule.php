@@ -7,6 +7,7 @@ use Acme\Conduit\Module\ConduitAuth\Annotation\ConduitAuth;
 use Acme\Conduit\Module\ConduitAuth\AuthService\AuthServiceInterface;
 use Acme\Conduit\Module\ConduitAuth\AuthService\AuthServiceProvider;
 use Acme\Conduit\Module\ConduitAuth\Login\Login;
+use Acme\Conduit\Module\ConduitAuth\Request\RequestProvider;
 use Acme\Conduit\Module\ConduitAuth\Token\Token;
 use Acme\Conduit\Module\ConduitAuth\Token\TokenProvider;
 use Aura\Web\Request;

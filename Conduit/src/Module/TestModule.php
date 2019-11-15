@@ -5,6 +5,7 @@ namespace Acme\Conduit\Module;
 
 use BEAR\Package\AbstractAppModule;
 use Ray\AuraSqlModule\AuraSqlModule;
+use Ray\TestDouble\TestDoubleModule;
 
 class TestModule extends AbstractAppModule
 {
@@ -21,5 +22,7 @@ class TestModule extends AbstractAppModule
                 getenv('DB_SLAVE')
             )
         );
+
+        $this->install(new TestDoubleModule);
     }
 }

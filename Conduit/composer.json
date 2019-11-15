@@ -20,7 +20,8 @@
         "bear/qatools": "^1.9",
         "josegonzalez/dotenv": "^3.2",
         "roave/security-advisories": "dev-master",
-        "bear/api-doc": "^0.4.1"
+        "bear/api-doc": "^0.4.1",
+        "ray/test-double": "1.x-dev"
     },
     "autoload": {
         "psr-4": {
@@ -29,7 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Acme\\Conduit\\": "tests/"
+            "Acme\\Conduit\\": "tests/fake-src"
         }
     },
     "scripts": {

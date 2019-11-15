@@ -1,13 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace Acme\Conduit\Module\ConduitAuth;
+namespace Acme\Conduit\Module\ConduitAuth\Request;
 
 use Aura\Web\Request;
 use Aura\Web\WebFactory;
 use Ray\Di\ProviderInterface;
+use Ray\TestDouble\Annotation\Fakeable;
 
-final class RequestProvider implements ProviderInterface
+
+/**
+ * @Fakeable
+ * @see FakeRequestProvider
+ */
+class RequestProvider implements ProviderInterface
 {
 
     /**
