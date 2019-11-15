@@ -25,8 +25,7 @@ final class TokenProvider implements ProviderInterface
      */
     public function get(): Token
     {
-//        $authorization = $this->request->headers->get('authorization', '');
-        $authorization = 'Token hoge';
+        $authorization = $this->request->headers->get('authorization', '');
         if ($authorization === '') {
             throw new UnauthorizedException('No token given');
         }
