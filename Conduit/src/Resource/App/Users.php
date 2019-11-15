@@ -3,20 +3,17 @@ declare(strict_types=1);
 
 namespace Acme\Conduit\Resource\App;
 
-use Acme\Conduit\Module\ConduitAuth\ConduitAuth;
 use Acme\Conduit\Module\Error\ValidationErrorException;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\ResourceObject;
 use Koriym\HttpConstants\StatusCode;
 use Ray\AuraSqlModule\Annotation\Transactional;
 use Ray\Di\Di\Named;
-use Ray\Query\Annotation\Query;
 use Ray\Validation\Annotation\OnFailure;
 use Ray\Validation\Annotation\Valid;
 use Ray\Validation\Annotation\OnValidate;
 use Ray\Validation\FailureInterface;
 use Ray\Validation\Validation;
-
 
 /**
  * Class Users

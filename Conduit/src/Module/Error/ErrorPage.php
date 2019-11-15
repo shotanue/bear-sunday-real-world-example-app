@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Acme\Conduit\Module\Error;
 
-use Acme\Conduit\Module\ConduitAuth\ForbiddenException;
-use Acme\Conduit\Module\ConduitAuth\UnauthorizedException;
+use Acme\Conduit\Module\ConduitAuth\Exceptions\ForbiddenException;
+use Acme\Conduit\Module\ConduitAuth\Exceptions\UnauthorizedException;
 use BEAR\Package\Provide\Error\LogRef;
 use BEAR\Package\Provide\Error\Status;
 use BEAR\Resource\Exception\JsonSchemaException;
