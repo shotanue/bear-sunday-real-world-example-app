@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Acme\Conduit\Resource\App;
 
+use Acme\Conduit\Module\ConduitAuth\Token\Token;
 use Acme\Conduit\Module\Error\ValidationErrorException;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\ResourceObject;
@@ -75,7 +76,7 @@ class Users extends ResourceObject
         string $bio = '',
         string $image = ''
     ): ResourceObject {
-        $token = 'tmp-token';
+        $token = Token::create();
         $user = compact('email', 'token', 'username', 'bio', 'image');
 
         ($this->registerUser)($user);

@@ -30,7 +30,7 @@ class TokenProviderTest extends TestCase
         $this->request = $request;
     }
 
-    public function testGet()
+    public function testGet(): void
     {
         $actualToken = (new TokenProvider($this->request))->get();
         $this->assertSame(

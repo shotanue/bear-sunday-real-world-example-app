@@ -5,6 +5,8 @@ namespace Acme\Conduit\Module\ConduitAuth\Login;
 
 use Acme\Conduit\Module\ConduitAuth\Exceptions\ForbiddenException;
 use Acme\Conduit\Module\ConduitAuth\Token\Token;
+use Aura\Sql\ExtendedPdoInterface;
+use Aura\SqlQuery\Common\SelectInterface;
 use Ray\AuraSqlModule\AuraSqlInject;
 use Ray\AuraSqlModule\AuraSqlSelectInject;
 
@@ -18,9 +20,11 @@ final class Login
      */
     private $token;
 
-    public function __construct(Token $token)
+    public function __construct(Token $token,ExtendedPdoInterface $extendedPdo,SelectInterface $select)
     {
         $this->token = $token;
+        $this->setAuraSql($extendedPdo);
+        $this->setAuraSqlSelect($select);
     }
 
     public function __invoke(): int

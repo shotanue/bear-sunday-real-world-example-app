@@ -5,14 +5,15 @@
     "description": "",
     "require": {
         "php": ">=7.3.0",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "ext-openssl": "*",
         "bear/package": "^1.9",
         "bear/swoole": "^0.4.2",
         "bear/aura-router-module": "^2.0",
         "ray/identity-value-module": "^0.2.0",
         "ray/query-module": "^0.5.1",
         "ray/validate-module": "^1.0",
-        "ext-pdo": "*",
-        "ext-json": "*",
         "firebase/php-jwt": "^5.0",
         "aura/web": "^2.1"
     },

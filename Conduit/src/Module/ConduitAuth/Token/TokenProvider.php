@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Acme\Conduit\Module\ConduitAuth\Token;
 
 use Acme\Conduit\Module\ConduitAuth\Exceptions\ForbiddenException;
-use Acme\Conduit\Module\ConduitAuth\Exceptions\UnauthorizedException;
 use Aura\Web\Request;
 use Ray\Di\ProviderInterface;
 
@@ -27,7 +26,7 @@ final class TokenProvider implements ProviderInterface
     {
         $authorization = $this->request->headers->get('authorization', '');
         if ($authorization === '') {
-            throw new UnauthorizedException('No token given');
+            return new Token($authorization);
         }
 
         $needle = 'Token ';
