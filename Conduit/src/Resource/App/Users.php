@@ -3,12 +3,9 @@ declare(strict_types=1);
 
 namespace Acme\Conduit\Resource\App;
 
-use Acme\Conduit\Module\ConduitAuth\Token\Token;
 use Acme\Conduit\Module\Error\ValidationErrorException;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\ResourceObject;
-use Koriym\HttpConstants\StatusCode;
-use Ray\AuraSqlModule\Annotation\Transactional;
 use Ray\Di\Di\Named;
 use Ray\Validation\Annotation\OnFailure;
 use Ray\Validation\Annotation\Valid;
@@ -29,59 +26,57 @@ class Users extends ResourceObject
     /**
      * @var callable
      */
-    private $findByEmail;
+    private $findByUuid;
     /**
      * @var callable
      */
     private $findByUsername;
 
     /**
-     * @Named("registerUser=register_user, findByEmail=find_by_email, findByUsername=find_by_username")
+     * @JsonSchema(key="user", schema="user.json", params="user.get.json")
+     * @Named(registerUser="register_user", findByUuid="find_by_uuid", findByUser="find_by_username")
+     *
      * @param callable $registerUser
-     * @param callable $findByEmail
-     * @param callable $findByUsername
+     * @param callable $findByUuid
+     * @param callable $findByUsename
      */
-    public function __construct(callable $registerUser, callable $findByEmail, callable $findByUsername)
+    public function __construct(callable $registerUser, callable $findByUuid, callable $findByUsename)
     {
         $this->registerUser = $registerUser;
-        $this->findByEmail = $findByEmail;
-        $this->findByUsername = $findByUsername;
+        $this->findByUuid = $findByUuid;
+        $this->findByUsername = $findByUsename;
     }
 
-    /**
-     */
-    public function onGet(): ResourceObject
+    public function onGet(string $uuid): ResourceObject
     {
         $this->body = [
-            'tmp' => 'test'
+            'user' => ($this->findByUuid)($uuid)
         ];
         return $this;
     }
 
+
     /**
      * @JsonSchema(key="user", schema="user.json", params="user.post.json")
-     *
      * @Valid
-     * @Transactional
      *
-     * @param string $email
+     * @param string $uuid
      * @param string $username
      * @param string $bio
      * @param string $image
      * @return ResourceObject
      */
     public function onPost(
-        string $email,
-        string $username = '',
-        string $bio = '',
-        string $image = ''
+        string $uuid,
+        string $username,
+        string $bio,
+        string $image
     ): ResourceObject {
-        $token = Token::create();
-        $user = compact('email', 'token', 'username', 'bio', 'image');
+        $user = compact('username', 'bio', 'image');
 
-        ($this->registerUser)($user);
-
-        $this->code = StatusCode::OK;
+        ($this->registerUser)([
+            'user' => array_merge($user, compact('uuid'))
+        ]);
 
         $this->body = compact('user');
 
@@ -90,22 +85,24 @@ class Users extends ResourceObject
 
     /**
      * @OnValidate
-     * @param string $email
+     * @param string $uuid
      * @param string $username
      * @return Validation
      */
     public function onValidate(
-        string $email,
-        string $username = ''
+        string $uuid,
+        string $username
     ): Validation {
         $validation = new Validation();
-        if (($this->findByEmail)(compact('email'))) {
-            $validation->addError('email', 'has already taken');
+
+        if (($this->findByUuid)(compact('uuid'))) {
+            $validation->addError('uuid', 'has already taken');
         }
 
         if (($this->findByUsername)(compact('username'))) {
             $validation->addError('username', 'has already taken');
         }
+
         return $validation;
     }
 

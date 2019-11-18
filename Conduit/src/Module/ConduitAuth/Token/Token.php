@@ -17,9 +17,9 @@ final class Token
         $this->token = $token;
     }
 
-    public static function create():string
+    public static function create(): string
     {
-        // todo jwt token
+        // todo use jwt token
         $TOKEN_LENGTH = 16;//16*2=32byte
         $bytes = openssl_random_pseudo_bytes($TOKEN_LENGTH);
         return bin2hex($bytes);
@@ -30,7 +30,7 @@ final class Token
      */
     public function asString(): string
     {
-        if ($this->token === ''){
+        if ($this->token === '') {
             throw new UnauthorizedException('No token given');
         }
         return $this->token;

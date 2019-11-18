@@ -4,6 +4,7 @@ CREATE TABLE `user`
     `createdAt` datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updatedAt` datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `email`     varchar(255)        NOT NULL,
+    `password`  varchar(255)        NOT NULL,
     `token`     varchar(255)        NOT NULL,
     `username`  varchar(255)        NOT NULL,
     `bio`       text                NOT NULL,
@@ -11,6 +12,19 @@ CREATE TABLE `user`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE `auth`
+(
+    `uuid`      varchar(255) NOT NULL,
+    `createdAt` datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updatedAt` datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `token`     varchar(255) NOT NULL,
+    PRIMARY KEY (`uuid`),
+    INDEX auth_token_index (`token`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+
+
 
 CREATE TABLE `article`
 (

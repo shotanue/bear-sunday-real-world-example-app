@@ -2,9 +2,10 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "/user POST request validation",
   "properties": {
-    "email": {
+    "uuid": {
       "type": "string",
-      "format": "email"
+      "minLength": 1,
+      "maxLength": 255
     },
     "username": {
       "type": "string",
@@ -23,7 +24,7 @@
     }
   },
   "required": [
-    "email",
+    "uuid",
     "username",
     "bio",
     "image"
