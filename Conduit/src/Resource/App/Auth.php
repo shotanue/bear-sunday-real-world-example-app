@@ -8,13 +8,15 @@ use Acme\Conduit\Module\ConduitAuth\Token\Token;
 use Acme\Conduit\Module\Error\ValidationErrorException;
 use BEAR\Resource\Annotation\JsonSchema;
 use BEAR\Resource\ResourceObject;
+use Koriym\HttpConstants\StatusCode;
 use Ray\Di\Di\Named;
 use Ray\Validation\Annotation\OnFailure;
+use Ray\Validation\Annotation\OnValidate;
 use Ray\Validation\Annotation\Valid;
 use Ray\Validation\FailureInterface;
 use Ray\Validation\Validation;
 
-final class Auth extends ResourceObject
+class Auth extends ResourceObject
 {
     /**
      * @var callable
@@ -31,7 +33,7 @@ final class Auth extends ResourceObject
     private $login;
 
     /**
-     * @Named("$this->registerAuth=register_auth, findAuthByEmail=find_auth_by_email")
+     * @Named("registerAuth=register_auth, findAuthByEmail=find_auth_by_email")
      * @param callable $registerAuth
      * @param callable $findAuthByEmail
      * @param Login $login
@@ -61,24 +63,38 @@ final class Auth extends ResourceObject
     /**
      * @JsonSchema(key="auth", schema="auth.json", params="auth.post.json")
      * @Valid
-     * @param string $email
-     * @param string $password
+     * @param array $user
      * @return ResourceObject
      */
-    public function onPost(string $email, string $password): ResourceObject
+    public function onPost(array $user): ResourceObject
     {
         $uuid = Token::create();
+        $email = $user['email'];
+        $password = $user['password'];
+
         ($this->registerAuth)(compact('uuid', 'email', 'password'));
+
+        $this->code = StatusCode::CREATED;
+        $this->body = [
+            'auth' => compact('uuid', 'email')
+        ];
         return $this;
     }
 
-    public function onValid(string $email): void
+    /**
+     * @OnValidate
+     * @param array $user
+     * @return Validation
+     */
+    public function onValid(array $user): Validation
     {
         $validation = new Validation();
+        $email = $user['email'];
 
         if (($this->findAuthByEmail)(compact('email'))) {
             $validation->addError('uuid', 'has already taken');
         }
+        return $validation;
     }
 
 

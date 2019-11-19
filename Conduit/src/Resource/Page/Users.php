@@ -50,10 +50,10 @@ class Users extends ResourceObject
      */
     public function onPost(
         string $email,
-        string $username = '',
-        string $bio = '',
-        string $image = '',
-        string $password = ''
+        string $username,
+        string $bio,
+        string $image,
+        string $password
     ): ResourceObject {
         $ro = $this->resource->post(
             'app://self/auth',

@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "/user POST request validation",
+  "title": "/auth POST request validation",
+  "type": "object",
   "properties": {
     "user": {
       "type": "object",
