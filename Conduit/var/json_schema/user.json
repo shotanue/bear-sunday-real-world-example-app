@@ -4,39 +4,44 @@
   "title": "User",
   "type": "object",
   "properties": {
-    "email": {
-      "type": "string",
-      "description": "The email of the user",
-      "format": "email"
-    },
-    "token": {
-      "type": "string",
-      "description": "The token of the user",
-      "maxLength": 255
-    },
-    "username": {
-      "type": "string",
-      "description": "The name of the user",
-      "maxLength": 255
-    },
-    "bio": {
-      "description": "The bio of the status",
-      "type": "string"
-    },
-    "image": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "The image-url of the user",
-      "maxLength": 255
+    "user": {
+      "email": {
+        "type": "string",
+        "description": "The email of the user",
+        "format": "email"
+      },
+      "token": {
+        "type": "string",
+        "description": "The token of the user",
+        "maxLength": 255
+      },
+      "username": {
+        "type": "string",
+        "description": "The name of the user",
+        "maxLength": 255
+      },
+      "bio": {
+        "description": "The bio of the status",
+        "type": "string"
+      },
+      "image": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The image-url of the user",
+        "maxLength": 255
+      },
+      "required": [
+        "email",
+        "token",
+        "username",
+        "bio",
+        "image"
+      ]
     }
   },
   "required": [
-    "email",
-    "token",
-    "username",
-    "bio",
-    "image"
+    "user"
   ]
 }

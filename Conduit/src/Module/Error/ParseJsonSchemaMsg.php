@@ -7,7 +7,7 @@ final class ParseJsonSchemaMsg
 {
     /**
      * sample error message
-     * [email] Invalid email; [username] Must be at least 1 characters long; by /var/app/var/json_validate/user.post.json
+     * [email] Invalid email; [username] Must be at least 1 characters long; by /var/app/var/json_validate/users.post.json
      *
      * convert to
      * ['email' => 'Invalid email', 'username' => ' Must be at least 1 characters long']

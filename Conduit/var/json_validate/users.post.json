@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "/user POST request validation",
+  "properties": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "bio": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "image": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        }
+      }
+    }
+  },
+  "required": [
+    "uuid",
+    "username",
+    "bio",
+    "image"
+  ]
+}

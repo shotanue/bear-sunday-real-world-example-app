@@ -10,7 +10,7 @@ class ParseJsonSchemaMsgTest extends TestCase
 
     public function testParse(): void
     {
-        $sample = '[email] Invalid email; [username] Must be at least 1 characters long; by /var/app/var/json_validate/user.post.json';
+        $sample = '[email] Invalid email; [username] Must be at least 1 characters long; by /var/app/var/json_validate/users.post.json';
         $actual = ParseJsonSchemaMsg::parse($sample);
 
         $expected = [

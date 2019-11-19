@@ -57,7 +57,7 @@ class Users extends ResourceObject
 
 
     /**
-     * @JsonSchema(key="user", schema="user.json", params="user.post.json")
+     * @JsonSchema(key="user", schema="user.json", params="users.post.json")
      * @Valid
      *
      * @param string $uuid
