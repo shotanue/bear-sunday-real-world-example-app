@@ -3,18 +3,19 @@ declare(strict_types=1);
 
 namespace Acme\Conduit\Resource\App;
 
+use BEAR\RepositoryModule\Annotation\Cacheable;
 use BEAR\Resource\ResourceObject;
 
 /**
- * Class Users
  * @package Acme\Conduit\Resource\App\Users
+ * @Cacheable(expirySecond=30)
  */
-class Users extends ResourceObject
+class Index extends ResourceObject
 {
     public function onGet(): ResourceObject
     {
         $this->body = [
-            'user' => ['hello']
+            'home' => ['index']
         ];
         return $this;
     }

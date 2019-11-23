@@ -28,4 +28,10 @@ FROM base-image AS development
 EXPOSE 8080 9000
 
 ENTRYPOINT ["php"]
-CMD ["bin/swoole.php"]
+CMD [ \
+    "-dzend_extension=xdebug.so", \
+     "-S",\
+     "0.0.0.0:8080", \
+     "-t",\
+     "public"\
+]

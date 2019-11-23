@@ -2,8 +2,6 @@
 
 namespace Acme\Conduit\Module;
 
-use Acme\Conduit\Module\ConduitAuth\ConduitAuthModule;
-use Acme\Conduit\Module\Error\OverrideErrorPageFactoryModule;
 use BEAR\Package\AbstractAppModule;
 use BEAR\Package\PackageModule;
 use BEAR\Package\Provide\Router\AuraRouterModule;
@@ -49,12 +47,6 @@ class AppModule extends AbstractAppModule
 
         $this->install(new AuraRouterModule($appDir . '/var/conf/aura.route.php'));
         $this->install(new ValidateModule);
-
-
-        $this->install(new ConduitAuthModule);
-
-        // override default modules defined in PackageModule
-        $this->install(new OverrideErrorPageFactoryModule);
 
         $this->install(new PackageModule);
 
