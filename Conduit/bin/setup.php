@@ -10,7 +10,6 @@ passthru('rm -rf var/tmp/*');
 passthru('chmod 775 var/tmp');
 passthru('chmod 775 var/log');
 
-
 // db
 //$dsn = 'mysql:host=' . getenv('DB_HOST');
 //$userName = getenv('DB_USER');

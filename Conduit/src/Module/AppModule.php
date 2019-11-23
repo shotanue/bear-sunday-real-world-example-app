@@ -1,5 +1,4 @@
 <?php
-
 namespace Acme\Conduit\Module;
 
 use BEAR\Package\AbstractAppModule;
@@ -17,7 +16,7 @@ class AppModule extends AbstractAppModule
     /**
      * {@inheritdoc}
      */
-    protected function configure(): void
+    protected function configure() : void
     {
         $appDir = $this->appMeta->appDir;
         /** @noinspection PhpIncludeInspection */
@@ -49,6 +48,5 @@ class AppModule extends AbstractAppModule
         $this->install(new ValidateModule);
 
         $this->install(new PackageModule);
-
     }
 }
