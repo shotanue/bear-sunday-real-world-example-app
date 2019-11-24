@@ -20,6 +20,7 @@
         <exclude name="PEAR.Commenting.FileComment.Missing"/>
     </rule>
     <file>src</file>
+    <file>app-src</file>
     <file>tests</file>
     <exclude-pattern>tests/tmp/*</exclude-pattern>
 </ruleset>
