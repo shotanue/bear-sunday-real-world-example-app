@@ -32,7 +32,6 @@
     "autoload-dev": {
         "psr-4": {
             "Acme\\Conduit\\": "tests/fake-src",
-            "Test\\Conduit\\Domain\\": "tests/Domain",
             "Test\\Conduit\\Module\\": "tests/Module",
             "Test\\Conduit\\Resource\\": "tests/Resource"
         }

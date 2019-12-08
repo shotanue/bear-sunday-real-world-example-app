@@ -1,6 +1,7 @@
 <?php
 namespace Acme\Conduit\Module;
 
+use Acme\Conduit\Module\Auth\AuthModule;
 use BEAR\Package\AbstractAppModule;
 use BEAR\Package\PackageModule;
 use BEAR\Package\Provide\Router\AuraRouterModule;
@@ -43,6 +44,8 @@ class AppModule extends AbstractAppModule
                 $appDir . '/var/json_validate'
             )
         );
+
+        $this->install(new AuthModule);
 
         $this->install(new AuraRouterModule($appDir . '/var/conf/aura.route.php'));
         $this->install(new ValidateModule);
