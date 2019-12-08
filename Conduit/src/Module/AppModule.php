@@ -1,7 +1,10 @@
 <?php
+declare(strict_types=1);
+
 namespace Acme\Conduit\Module;
 
 use Acme\Conduit\Module\Auth\AuthModule;
+use Acme\Conduit\Module\Scheme\ConduitSchemeCollectionModule;
 use BEAR\Package\AbstractAppModule;
 use BEAR\Package\PackageModule;
 use BEAR\Package\Provide\Router\AuraRouterModule;
@@ -17,7 +20,7 @@ class AppModule extends AbstractAppModule
     /**
      * {@inheritdoc}
      */
-    protected function configure() : void
+    protected function configure(): void
     {
         $appDir = $this->appMeta->appDir;
         /** @noinspection PhpIncludeInspection */
@@ -49,7 +52,7 @@ class AppModule extends AbstractAppModule
 
         $this->install(new AuraRouterModule($appDir . '/var/conf/aura.route.php'));
         $this->install(new ValidateModule);
-
+        $this->install(new ConduitSchemeCollectionModule);
         $this->install(new PackageModule);
     }
 }
