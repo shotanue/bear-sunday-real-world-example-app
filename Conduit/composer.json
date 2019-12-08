@@ -4,7 +4,7 @@
     "license": "proprietary",
     "description": "",
     "require": {
-        "php": ">=7.3.0",
+        "php": ">=7.4.0",
         "ext-pdo": "*",
         "ext-json": "*",
         "ext-openssl": "*",
@@ -70,8 +70,8 @@
         "serve": "php -dzend_extension=xdebug.so -S 0.0.0.0:9000 -t public",
         "app": "php bin/app.php",
         "page": "php bin/page.php",
-        "migrate": "mysqldef -uroot -proot -hdb conduit < var/schema/schema.sql",
-        "migrate-test": "mysqldef -uroot -proot -hdb conduit_test < var/schema/schema.sql"
+        "migrate": "php bin/migrate_db.php",
+        "migrate-test": "php bin/migrate_db.php test"
     },
     "scripts-descriptions": {
         "setup": "Setup the project",
