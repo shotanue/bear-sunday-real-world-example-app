@@ -1,5 +1,4 @@
-FROM docker.pkg.github.com/shotanue/swoole-app/docker-dev:7.3-alpine3.10 AS base-image
-
+FROM php:7.4.0-cli-alpine3.10 AS base-image
 WORKDIR /var/app
 VOLUME /var/app
 
@@ -29,7 +28,7 @@ EXPOSE 8080 9000
 
 ENTRYPOINT ["php"]
 CMD [ \
-    "-dzend_extension=xdebug.so", \
+#    "-dzend_extension=xdebug.so", \
      "-S",\
      "0.0.0.0:8080", \
      "-t",\
