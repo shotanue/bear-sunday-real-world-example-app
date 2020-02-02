@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Acme\Conduit\Module\Auth;
 
+use Acme\Conduit\Module\Auth\Annotations\PublicDomain;
+use Acme\Conduit\Module\Auth\Annotations\RequireUuid;
 use Doctrine\Common\Annotations\Reader;
 use Ray\Aop\MethodInterceptor;
 use Ray\Aop\MethodInvocation;

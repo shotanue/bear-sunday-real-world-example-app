@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace Acme\Conduit\Resource\Page;
 
-use Acme\Conduit\Module\Auth\PublicDomain;
+use Acme\Conduit\Module\Auth\Annotations\PublicDomain;
 use BEAR\Resource\ResourceObject;
 
 class Index extends ResourceObject
