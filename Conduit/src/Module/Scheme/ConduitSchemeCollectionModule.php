@@ -1,17 +1,16 @@
 <?php
 declare(strict_types=1);
-
 namespace Acme\Conduit\Module\Scheme;
 
-use BEAR\Package\AbstractAppModule;
 use BEAR\Resource\SchemeCollectionInterface;
+use Ray\Di\AbstractModule;
 
-final class ConduitSchemeCollectionModule extends AbstractAppModule
+final class ConduitSchemeCollectionModule extends AbstractModule
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
-    protected function configure(): void
+    protected function configure() : void
     {
         $this->bind(SchemeCollectionInterface::class)->toProvider(ConduitSchemeCollectionProvider::class);
     }

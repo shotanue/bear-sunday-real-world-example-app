@@ -1,56 +1,54 @@
 <?php
 declare(strict_types=1);
-
 namespace Acme\Conduit\Module\Auth;
+
+use InvalidArgumentException;
+use stdClass;
 
 final class Jwt
 {
-    private const KEY = 'key'; // Conduit is not for production.
+    private const SECRET = 'secretKey'; // Conduit is not for production.
+    private stdClass $payload;
 
-    private $uuid;
-
-    private function __construct(array $map)
+    public function __construct($payload)
     {
-        $this->uuid = $map['uuid'];
+        $this->payload = $payload;
     }
 
-    public static function create(array $payload): self
+    public static function encode(array $payload) : string
     {
-        return new self($payload);
+        if (! isset($payload['uuid']) || $payload === '') {
+            throw new InvalidArgumentException('no uuid found in payload');
+        }
+
+        return \Firebase\JWT\JWT::encode($payload, self::SECRET);
     }
 
-    public static function parse(string $authorization): self
+    public static function decode(string $jwtString) : self
     {
-        if ($authorization === '') {
+        if ($jwtString === '') {
             throw new UnAuthorizedException('No JWT string given');
         }
 
-        $jwt = explode(' ', $authorization)[1] ?? '';
+        $jwt = explode(' ', $jwtString)[1] ?? '';
 
-        $payload = (array)\Firebase\JWT\JWT::decode($jwt, self::KEY, ['HS256']);
-        return new self($payload);
+        return new self(
+            \Firebase\JWT\JWT::decode($jwt, self::SECRET, ['HS256'])
+        );
     }
 
-    public function encode(): string
+    public function isExpired() : bool
     {
-        $payload = [
-            'uuid' => $this->uuid
-        ];
-
-        return \Firebase\JWT\JWT::encode($payload, self::KEY);
-    }
-
-    public function isExpired(): bool
-    {
+        // todo implement
         return false;
     }
 
-    public function toUuid(): Uuid
+    public function toUuid() : string
     {
-        return new Uuid($this->uuid);
+        return $this->payload->uuid;
     }
 
-    public function validate(): void
+    public function validate() : void
     {
         if ($this->isExpired()) {
             throw new UnAuthorizedException('JWT expired');

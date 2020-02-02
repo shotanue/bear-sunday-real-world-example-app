@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 namespace Acme\Conduit\Module\Scheme;
 
 use BEAR\Resource\Annotation\AppName;
@@ -23,8 +22,7 @@ final class ConduitSchemeCollectionProvider implements ProviderInterface
     private $injector;
 
     /**
-     * @param string $appName
-     *
+     * @param string            $appName
      * @param InjectorInterface $injector
      * @AppName("appName")
      */
@@ -39,7 +37,7 @@ final class ConduitSchemeCollectionProvider implements ProviderInterface
      *
      * @return SchemeCollection
      */
-    public function get(): SchemeCollection
+    public function get() : SchemeCollection
     {
         $schemeCollection = new SchemeCollection;
         $schemeCollection->scheme('page')->host('self')->toAdapter(new AppAdapter($this->injector, $this->appName));

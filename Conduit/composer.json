@@ -9,7 +9,6 @@
         "ext-json": "*",
         "ext-openssl": "*",
         "bear/package": "^1.9",
-        "bear/swoole": "^0.4.2",
         "bear/aura-router-module": "^2.0",
         "ray/identity-value-module": "^0.2.0",
         "ray/query-module": "^0.5.1",

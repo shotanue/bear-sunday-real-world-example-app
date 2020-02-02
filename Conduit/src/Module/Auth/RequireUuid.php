@@ -6,6 +6,6 @@ namespace Acme\Conduit\Module\Auth;
  * @Annotation
  * @Target("METHOD")
  */
-final class PublicDomain
+final class RequireUuid
 {
 }

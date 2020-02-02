@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 namespace Acme\Conduit\Module;
 
 use Acme\Conduit\Module\Auth\AuthModule;
@@ -20,7 +19,7 @@ class AppModule extends AbstractAppModule
     /**
      * {@inheritdoc}
      */
-    protected function configure(): void
+    protected function configure() : void
     {
         $appDir = $this->appMeta->appDir;
         /** @noinspection PhpIncludeInspection */
